@@ -53,3 +53,8 @@ dkms.conf
 
 # Project specific directories
 build
+docs
+
+# Project specific files
+*.py
+*.sh
