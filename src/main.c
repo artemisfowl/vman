@@ -23,31 +23,44 @@
 
 /**
  * TODO:
- * Add a function to check the number of arguments passed.
  * Add function to parse arguments (including long arguments).
  * Add function to create directories (including recursive ones).
  *
  * COMPLETE:
  * Add function to show the program version.
  * Add function to show the program usage.
+ * Add a function to check the number of arguments passed.
  */
 
 int main(int argc, char *argv[])
 {
-	/* prepare the options (short and long) to be parsed */
+	/**
+	 * prepare the options (short and long) to be parsed
+	 * Options mapping:
+	 * -a, --add: for adding a new program and respective install location.
+	 * -c, --config: for configuring an already configured program.
+	 * -v, --version: for showing the program version.
+	 * -d, --debug: for enabling debug run.
+	 * -h, --help: for showing the program usage details.
+	 */
 	struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
 		{"config", required_argument, NULL, 'c'},
-		{"version", required_argument, NULL, 'v'},
-		{"debug", required_argument, NULL, 'd'},
+		{"version", no_argument, NULL, 'v'},
+		{"debug", no_argument, NULL, 'd'},
+		{"help", no_argument, NULL, 'h'},
 		{NULL, 0, NULL, 0}
 	};
-	char short_options[] = "vda:c:";
+	char short_options[] = "vdha:c:";
 
 	/* start parsing the arguments */
-	if (vman_chkargs(argc, argv, MIN_ARGC, short_options, long_options)) {
-		fprintf(stderr, "Error while parsing CLI arguments\n");
-		return -1;
+	switch (vman_chkargs(argc, argv, MIN_ARGC,
+				short_options, long_options)) {
+		case 'v':
+			vman_version();
+			break;
+		default:
+			break;
 	}
 
 	return 0;

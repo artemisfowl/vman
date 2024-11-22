@@ -11,6 +11,7 @@
  */
 
 #include "../inc/vman.h"
+#include "../inc/argparse.h"
 #include "../inc/buildinfo.h"
 #include <string.h>
 
@@ -50,5 +51,5 @@ int vman_chkargs(int argc, char **argv, int r_argc, char *s_args,
 	/* fixme: start implementing the parsing using the argparse translation
 	 * units */
 
-	return 0;
+	return argparse_parse(argc, argv, l_options, s_args);
 }
