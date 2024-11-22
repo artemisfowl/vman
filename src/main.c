@@ -18,6 +18,9 @@
 
 #include "../inc/vman.h"
 
+/* fixme: Testing include block - remove after done */
+/* fixme: Testing include block - remove after done */
+
 /**
  * TODO:
  * Add a function to check the number of arguments passed.
@@ -31,9 +34,21 @@
 
 int main(int argc, char *argv[])
 {
-	if (vman_chkargs(argc, argv, MIN_ARGC, "")) {
+	/* prepare the options (short and long) to be parsed */
+	struct option long_options[] = {
+		{"add", required_argument, NULL, 'a'},
+		{"config", required_argument, NULL, 'c'},
+		{"version", required_argument, NULL, 'v'},
+		{"debug", required_argument, NULL, 'd'},
+		{NULL, 0, NULL, 0}
+	};
+	char short_options[] = "vda:c:";
+
+	/* start parsing the arguments */
+	if (vman_chkargs(argc, argv, MIN_ARGC, short_options, long_options)) {
 		fprintf(stderr, "Error while parsing CLI arguments\n");
 		return -1;
 	}
+
 	return 0;
 }

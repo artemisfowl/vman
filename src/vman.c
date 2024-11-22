@@ -12,7 +12,6 @@
 
 #include "../inc/vman.h"
 #include "../inc/buildinfo.h"
-#include <stdio.h>
 #include <string.h>
 
 void vman_usage(void)
@@ -21,7 +20,8 @@ void vman_usage(void)
 		"vman [OPTION[VALUES]]\n"
 		"Options:\n"
 
-		"\t-v, --version: Show the version of this program\n"
+		"\t-v, --version: Show the version of this program.\n"
+		"\t-d, --debug: Enable debug logging for the run.\n"
 	);
 }
 
@@ -30,7 +30,8 @@ void vman_version(void)
 	printf("vman v%d.%d build %d\n", MAJOR, MINOR, BUILD_NUMBER);
 }
 
-int vman_chkargs(int argc, char **argv, int r_argc, char *s_args)
+int vman_chkargs(int argc, char **argv, int r_argc, char *s_args,
+		struct option *l_options)
 {
 	if (!r_argc) {
 		fprintf(stderr, "Required arguments could not be 0\n");
@@ -41,10 +42,13 @@ int vman_chkargs(int argc, char **argv, int r_argc, char *s_args)
 		return -1;
 	}
 
-	if (!s_args && strlen(s_args)) {
+	if (!s_args || strlen(s_args) == 0) {
 		fprintf(stderr, "Short arguments not provided\n");
 		return -1;
 	}
+
+	/* fixme: start implementing the parsing using the argparse translation
+	 * units */
 
 	return 0;
 }

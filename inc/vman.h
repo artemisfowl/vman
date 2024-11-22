@@ -11,6 +11,7 @@
  */
 
 #include <stdio.h>
+#include <getopt.h>
 
 #ifndef MIN_ARGC
 #define MIN_ARGC 2
@@ -49,7 +50,11 @@ void vman_version(void);
  * @param argv - string array containing all the CLI arguments.
  * @param r_argc - integer containing the minimum required argument count.
  * @param s_args - string containing the short argument flags for arg parsing.
+ * @param l_options - option instance for parsing long options.
  *
  * @return Returns 0 on success, -1 on failure.
+ *
+ * @note If no long options are to be parsed, send NULL for this one.
  */
-int vman_chkargs(int argc, char *argv[], int r_argc, char *sargs);
+int vman_chkargs(int argc, char *argv[], int r_argc, char *s_args,
+		struct option *l_options);

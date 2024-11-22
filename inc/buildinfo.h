@@ -10,7 +10,7 @@
 #endif
 
 #ifndef BUILD_NUMBER
-	#define BUILD_NUMBER 2
+	#define BUILD_NUMBER 3
 #endif
 
 #endif
