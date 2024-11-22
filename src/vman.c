@@ -13,6 +13,7 @@
 #include "../inc/vman.h"
 #include "../inc/buildinfo.h"
 #include <stdio.h>
+#include <string.h>
 
 void vman_usage(void)
 {
@@ -27,4 +28,23 @@ void vman_usage(void)
 void vman_version(void)
 {
 	printf("vman v%d.%d build %d\n", MAJOR, MINOR, BUILD_NUMBER);
+}
+
+int vman_chkargs(int argc, char **argv, int r_argc, char *s_args)
+{
+	if (!r_argc) {
+		fprintf(stderr, "Required arguments could not be 0\n");
+		return -1;
+	} else if (argc < r_argc) {
+		fprintf(stderr, "Too few arguments...\n");
+		vman_usage();
+		return -1;
+	}
+
+	if (!s_args && strlen(s_args)) {
+		fprintf(stderr, "Short arguments not provided\n");
+		return -1;
+	}
+
+	return 0;
 }

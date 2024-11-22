@@ -20,15 +20,20 @@
 
 /**
  * TODO:
- * Add function to create directories (including recursive ones)
- * Add function to parse arguments (including long arguments)
+ * Add a function to check the number of arguments passed.
+ * Add function to parse arguments (including long arguments).
+ * Add function to create directories (including recursive ones).
  *
  * COMPLETE:
  * Add function to show the program version.
  * Add function to show the program usage.
  */
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	if (vman_chkargs(argc, argv, MIN_ARGC, "")) {
+		fprintf(stderr, "Error while parsing CLI arguments\n");
+		return -1;
+	}
 	return 0;
 }
