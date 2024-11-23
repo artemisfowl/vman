@@ -35,8 +35,26 @@
 #define CUSTOM_BIN "~/.cbin"
 #endif
 
+/**
+ * @brief vman configuration directory location
+ *
+ * This MACRO can be used to specify vman configuration directory location.
+ * This is the location where vman will be maintaining all the files for
+ * managing all the programs specified inside it.
+ */
 #ifndef VMAN_CONFIG_DIR
 #define VMAN_CONFIG_DIR "~/.config/vman"
+#endif
+
+/**
+ * @brief vman configuration filename.
+ *
+ * This MACRO can be used to specify the vman configuration filename. This
+ * configuration file will be present inside ~/.config/vman or as defined above
+ * inside the VMAN_CONFIG_DIR location.
+ */
+#ifndef VMANRC
+#define VMANRC "vmanrc"
 #endif
 
 /**

@@ -60,6 +60,23 @@ int vman_setup_prereq(runconfg_t *rconfig)
 		return -1;
 	}
 
+	/**
+	 * FIXME:
+	 * Call the function for setting up logging.
+	 * Write an info if the logging is set to INFO, else a debug log if the
+	 * logging is set to DEBUG.
+	 *
+	 * Call the function for creating directories recursively.
+	 * Create the custom binary directory.
+	 * Create the vman configuration directory.
+	 *
+	 * Call the function to check if the vman configuration file is present
+	 * or not.
+	 * Create the vman configuration file if it is not present.
+	 *
+	 * DONE:
+	 */
+
 	int result = 0;
 	return result;
 }

@@ -20,8 +20,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-/* fixme: Testing include block - remove after done */
-/* fixme: Testing include block - remove after done */
+/* FIXME: Testing include block - remove after done */
+/* FIXME: Testing include block - remove after done */
 
 /**
  * TODO:
@@ -87,11 +87,11 @@ int main(int argc, char *argv[])
 
 	if (vman_setup_prereq(&rconfig)) {
 		fprintf(stderr, "Error while setting up pre-requisites\n");
-		/* fixme: add the error logging for this one */
+		/* FIXME: add the error logging for this one */
 		return -1;
 	}
 
-	/* fixme: implement the code for performing the operations */
+	/* FIXME: implement the code for performing the operations */
 
 	return 0;
 }
