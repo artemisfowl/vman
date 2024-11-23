@@ -17,16 +17,20 @@
  */
 
 #include "../inc/vman.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 /* fixme: Testing include block - remove after done */
 /* fixme: Testing include block - remove after done */
 
 /**
  * TODO:
- * Add function to parse arguments (including long arguments).
+ * Add the constants related to vman.
  * Add function to create directories (including recursive ones).
  *
  * COMPLETE:
+ * Add function to perform operations based on CLI options.
+ * Add function to parse arguments (including long arguments).
  * Add function to show the program version.
  * Add function to show the program usage.
  * Add a function to check the number of arguments passed.
@@ -53,6 +57,12 @@ int main(int argc, char *argv[])
 	};
 	char short_options[] = "vdha:c:";
 
+	/* debug and program mode */
+	runconfg_t rconfig;
+	rconfig.enable_debug = false;
+	rconfig.ltf = true;
+	rconfig.lts = false;
+
 	/* start parsing the arguments */
 	switch (vman_chkargs(argc, argv, MIN_ARGC,
 				short_options, long_options)) {
@@ -62,10 +72,26 @@ int main(int argc, char *argv[])
 		case 'h':
 			vman_usage();
 			break;
-		default:
-			/* fixme: test this portion of the code */
+		case 'd':
+			rconfig.enable_debug = true;
+			break;
+		case 'a':
+			printf("Adding the program\n");
+			rconfig.mode = ADD;
+			break;
+		case 'c':
+			printf("Configuring the specified program\n");
+			rconfig.mode = CONFIGURE;
 			break;
 	}
+
+	if (vman_setup_prereq(&rconfig)) {
+		fprintf(stderr, "Error while setting up pre-requisites\n");
+		/* fixme: add the error logging for this one */
+		return -1;
+	}
+
+	/* fixme: implement the code for performing the operations */
 
 	return 0;
 }

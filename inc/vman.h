@@ -11,11 +11,60 @@
  */
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <getopt.h>
 
+/**
+ * @brief Minimum number of arguments that will be accepted by vman.
+ *
+ * This MACRO can be used to check the minimum number of arguments provided to
+ * vman at the time of running and provide a proper response based on the same.
+ */
 #ifndef MIN_ARGC
 #define MIN_ARGC 2
 #endif
+
+/**
+ * @brief Custom binary directory location.
+ *
+ * This MACRO can be used to specify the custom binary directory. This
+ * directory will be containing all the symlinks of the programs configured to
+ * be managed by vman.
+ */
+#ifndef CUSTOM_BIN
+#define CUSTOM_BIN "~/.cbin"
+#endif
+
+#ifndef VMAN_CONFIG_DIR
+#define VMAN_CONFIG_DIR "~/.config/vman"
+#endif
+
+/**
+ * @brief ProgramMode enum to be used in order to select the run mode.
+ *
+ * vman can be run to either add a new program or add a new install location to
+ * an already added program. This would be handled by the Program mode of ADD.
+ *
+ * When vman needs to select the right install location, it needs to be run in
+ * CONFIGURE mode in order to select the right install location.
+ */
+enum ProgramMode {
+	ADD,
+	CONFIGURE
+};
+
+/**
+ * @brief Structure to containing the run configuration when vman is run.
+ *
+ * This struct can be used to maintain the instance of run configuration used
+ * to run vman in order to either ADD or CONFIGURE a program and respective
+ * install location.
+ */
+typedef struct {
+	enum ProgramMode mode;
+	bool enable_debug;
+	bool lts, ltf; /* ltf - log to file, lts - log to stream */
+} runconfg_t;
 
 /**
  * @brief Function to show the usage of this program.
@@ -58,3 +107,18 @@ void vman_version(void);
  */
 int vman_chkargs(int argc, char *argv[], int r_argc, char *s_args,
 		struct option *l_options);
+
+/**
+ * @brief Function to setup the pre-requisites.
+ *
+ * This function can be used in order to setup the pre-requisites like the
+ * custom binary directory, program configuration storage location and other
+ * necessities which are required for vman to operate properly.
+ *
+ * @param void - no arguments are required for this function to perform.
+ *
+ * @return Returns 0 on success, -1 on failure.
+ *
+ * @note This function will also be responsible for setting up the logging.
+ */
+int vman_setup_prereq(runconfg_t *rconfig);

@@ -13,6 +13,7 @@
 #include "../inc/vman.h"
 #include "../inc/argparse.h"
 #include "../inc/buildinfo.h"
+#include <stdio.h>
 #include <string.h>
 
 void vman_usage(void)
@@ -49,4 +50,16 @@ int vman_chkargs(int argc, char **argv, int r_argc, char *s_args,
 	}
 
 	return argparse_parse(argc, argv, l_options, s_args);
+}
+
+int vman_setup_prereq(runconfg_t *rconfig)
+{
+	if (!rconfig) {
+		fprintf(stderr, "Runtime configuration "
+				"struct instance not provided\n");
+		return -1;
+	}
+
+	int result = 0;
+	return result;
 }
