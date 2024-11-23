@@ -48,8 +48,5 @@ int vman_chkargs(int argc, char **argv, int r_argc, char *s_args,
 		return -1;
 	}
 
-	/* fixme: start implementing the parsing using the argparse translation
-	 * units */
-
 	return argparse_parse(argc, argv, l_options, s_args);
 }

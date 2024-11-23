@@ -59,7 +59,11 @@ int main(int argc, char *argv[])
 		case 'v':
 			vman_version();
 			break;
+		case 'h':
+			vman_usage();
+			break;
 		default:
+			/* fixme: test this portion of the code */
 			break;
 	}
 
