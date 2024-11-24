@@ -13,8 +13,11 @@
 #include "../inc/vman.h"
 #include "../inc/argparse.h"
 #include "../inc/buildinfo.h"
+#include "../inc/log.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <linux/limits.h>
 
 void vman_usage(void)
 {
@@ -78,5 +81,29 @@ int vman_setup_prereq(runconfg_t *rconfig)
 	 */
 
 	int result = 0;
+
+	/* setting up logging */
+	char logfile[PATH_MAX];
+	memset(logfile, '\0', PATH_MAX);
+	/* FIXME: change the location to that of
+	 * the $HOME/.config/vman location */
+	sprintf(logfile, "%s/%s", getenv("HOME"), LOG_FILENAME);
+
+	if (rconfig->enable_debug) {
+		log_init(logfile, DEBUG);
+		rconfig->ltf = true;
+		rconfig->lts = true;
+	} else {
+		log_init(logfile, INFO);
+		rconfig->ltf = true;
+		rconfig->lts = false;
+	}
+	log_set_stream(rconfig->lts, rconfig->ltf);
+
+	info("Setting up vman prerequisites...");
+
+	/* TODO: setup the custom binary directory */
+	debug("Setting up custom binary location: %s", CUSTOM_BIN);
+
 	return result;
 }

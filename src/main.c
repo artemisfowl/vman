@@ -60,18 +60,16 @@ int main(int argc, char *argv[])
 	/* debug and program mode */
 	runconfg_t rconfig;
 	rconfig.enable_debug = false;
-	rconfig.ltf = true;
-	rconfig.lts = false;
 
 	/* start parsing the arguments */
 	switch (vman_chkargs(argc, argv, MIN_ARGC,
 				short_options, long_options)) {
 		case 'v':
 			vman_version();
-			break;
+			return 0;
 		case 'h':
 			vman_usage();
-			break;
+			return 0;
 		case 'd':
 			rconfig.enable_debug = true;
 			break;
@@ -87,7 +85,6 @@ int main(int argc, char *argv[])
 
 	if (vman_setup_prereq(&rconfig)) {
 		fprintf(stderr, "Error while setting up pre-requisites\n");
-		/* FIXME: add the error logging for this one */
 		return -1;
 	}
 

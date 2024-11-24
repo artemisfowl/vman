@@ -46,6 +46,10 @@
 #define VMAN_CONFIG_DIR "~/.config/vman"
 #endif
 
+#ifndef LOG_FILENAME
+#define LOG_FILENAME "run.log"
+#endif
+
 /**
  * @brief vman configuration filename.
  *
