@@ -36,7 +36,7 @@
 #endif
 
 /**
- * @brief vman configuration directory location
+ * @brief vman configuration directory location.
  *
  * This MACRO can be used to specify vman configuration directory location.
  * This is the location where vman will be maintaining all the files for
@@ -46,6 +46,12 @@
 #define VMAN_CONFIG_DIR "~/.config/vman"
 #endif
 
+/**
+ * @brief vman log file name.
+ *
+ * This MACRO can be used to specify the log file name that will be used by
+ * vman.
+ */
 #ifndef LOG_FILENAME
 #define LOG_FILENAME "run.log"
 #endif

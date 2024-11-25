@@ -13,6 +13,7 @@
 #include "../inc/vman.h"
 #include "../inc/argparse.h"
 #include "../inc/buildinfo.h"
+#include "../inc/io.h"
 #include "../inc/log.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,6 +66,7 @@ int vman_setup_prereq(runconfg_t *rconfig)
 
 	/**
 	 * FIXME:
+	 * Call the function to create the respective directory.
 	 * Call the function for setting up logging.
 	 * Write an info if the logging is set to INFO, else a debug log if the
 	 * logging is set to DEBUG.
@@ -82,28 +84,39 @@ int vman_setup_prereq(runconfg_t *rconfig)
 
 	int result = 0;
 
+
+	/* TODO: create the custom binary directory */
+
 	/* setting up logging */
-	char logfile[PATH_MAX];
-	memset(logfile, '\0', PATH_MAX);
-	/* FIXME: change the location to that of
-	 * the $HOME/.config/vman location */
-	sprintf(logfile, "%s/%s", getenv("HOME"), LOG_FILENAME);
+	char *logfpath = io_resolve_path(VMAN_CONFIG_DIR);
+	debug("Resolved filepath: %s\n", logfpath);
 
-	if (rconfig->enable_debug) {
-		log_init(logfile, DEBUG);
-		rconfig->ltf = true;
-		rconfig->lts = true;
-	} else {
-		log_init(logfile, INFO);
-		rconfig->ltf = true;
-		rconfig->lts = false;
+	/* TODO: create the vman configuration directory if it does not exist */
+	printf("Log filepath exists: %d\n", io_path_exists(logfpath));
+	if (!io_path_exists(logfpath)) {
+		info("Creating the log placement directory");
+		/* TODO: START WORKING FROM HERE */
 	}
-	log_set_stream(rconfig->lts, rconfig->ltf);
 
-	info("Setting up vman prerequisites...");
+	/* logfpath = strcat(logfpath, LOG_FILENAME); */
+	/* debug("Final log filepath: %s\n", logfpath); */
+
+	/* if (rconfig->enable_debug) { */
+	/* 	log_init(logfpath, DEBUG); */
+	/* 	rconfig->ltf = true; */
+	/* 	rconfig->lts = true; */
+	/* } else { */
+	/* 	log_init(logfpath, INFO); */
+	/* 	rconfig->ltf = true; */
+	/* 	rconfig->lts = false; */
+	/* } */
+	/* log_set_stream(rconfig->lts, rconfig->ltf); */
+
+	/* info("Setting up vman prerequisites..."); */
 
 	/* TODO: setup the custom binary directory */
-	debug("Setting up custom binary location: %s", CUSTOM_BIN);
+	/* debug("Setting up custom binary location: %s", CUSTOM_BIN); */
 
+	free(logfpath);
 	return result;
 }

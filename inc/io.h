@@ -28,3 +28,28 @@
  * @return Returns 0 on success, -1 on failure.
  */
 int io_mkdir(const char *path, const mode_t mode, bool recursive);
+
+/**
+ * @brief Function to resolve the path specified in the source and append the
+ * same to the destination.
+ *
+ * This function can be used to resolve the path from the home directory.
+ *
+ * @param s - string(const char *) containing the unresolved path.
+ *
+ * @return Returns if the path is resolved, NULL if resolution failed.
+ */
+char *io_resolve_path(const char *s);
+
+/**
+ * @brief Function to check if the path specified exists or not.
+ *
+ * This function can be used in order to check if the specified path exists or
+ * not.
+ *
+ * @param path - string(const char *) containing the path to be checked
+ * for existence.
+ *
+ * @return Returns TRUE on success, FALSE on failure.
+ */
+bool io_path_exists(const char *path);
