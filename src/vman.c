@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <linux/limits.h>
+#include <sys/stat.h>
 
 void vman_usage(void)
 {
@@ -84,18 +85,23 @@ int vman_setup_prereq(runconfg_t *rconfig)
 
 	int result = 0;
 
-
 	/* TODO: create the custom binary directory */
 
 	/* setting up logging */
 	char *logfpath = io_resolve_path(VMAN_CONFIG_DIR);
-	debug("Resolved filepath: %s\n", logfpath);
 
-	/* TODO: create the vman configuration directory if it does not exist */
-	printf("Log filepath exists: %d\n", io_path_exists(logfpath));
+	printf("vman config directory: %s\n", VMAN_CONFIG_DIR);
+	printf("Resolved log filepath: %s\n", logfpath);
+
+	/* TODO: create the vman configuration directory if it does
+	 * not exist */
 	if (!io_path_exists(logfpath)) {
-		info("Creating the log placement directory");
-		/* TODO: START WORKING FROM HERE */
+		if (io_mkdir(logfpath, S_IRWXU, TRUE)) {
+			fprintf(stderr, "Error while creating log path: %s\n",
+					logfpath);
+			free(logfpath);
+			return -1;
+		}
 	}
 
 	/* logfpath = strcat(logfpath, LOG_FILENAME); */
