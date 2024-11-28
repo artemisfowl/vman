@@ -58,3 +58,6 @@ docs
 # Project specific files
 *.py
 *.sh
+
+# builder specific configuration file
+.version_info.json
